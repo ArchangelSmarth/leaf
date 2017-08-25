@@ -1,27 +1,23 @@
 public final class Label: Tag {
-    public let name = "label_strong"
+    public let name = "Label"
+
 
     public func run(
-        stem: Stem,
-        context: Context,
         tagTemplate: TagTemplate,
-        arguments: [Argument]) throws -> Any? {
-        guard arguments.isEmpty else { throw "Label supports no arguments" }
+        arguments: ArgumentList) throws -> Node? {
         return nil
     }
 
     public func shouldRender(
-        stem: Stem,
-        context: Context,
         tagTemplate: TagTemplate,
-        arguments: [Argument], value: Any?) -> Bool {
+        arguments: ArgumentList, value: Node?) -> Bool {
         return true
     }
 
-    public func render(stem: Stem, context: Context, value: Any?, leaf: Leaf) throws -> Bytes {
+    public func render(stem: Stem, context: Context, value: Node?, leaf: Leaf) throws -> Bytes {
         var buffer = "\n<Label><strong>".bytes
         buffer += try stem.render(leaf, with: context)
-        buffer += "</strong></Label>\n".bytes
+        buffer += "</strong></Label></br>\n".bytes
         return buffer
     }
 }
